@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/departments")
 public class DepartmentController {
@@ -23,5 +25,13 @@ public class DepartmentController {
     public Department getDepartment(@PathVariable("id") Long departmentId){
         logger.info("DepartmentController.getDepartment()");
         return departmentService.getDepartment(departmentId);
+    }
+    @GetMapping("/allDepartments")
+    public List<Department> fetchAllDepartments(){
+        return departmentService.fetchAllDepartments();
+    }
+    @DeleteMapping("/deleteDepartment/{id}")
+    public void deleteDepartment(@PathVariable("id") Long departmentId){
+        departmentService.deleteDepartment(departmentId);
     }
 }

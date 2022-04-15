@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Digileaper Organizations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,500;0,800;0,900;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom-style.css}" rel="stylesheet">
+    <style>
+        #clmnsShowAndHide{
+            display: none;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 dig-head">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 logo" href="#"><img th:src="@{/images/Digileaper-Logo.png}" class="img-fluid"></a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <div class="dropdown header-dropdown">
+                <button class="btn btn-secondary profile-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img th:src="@{/images/person_black_profile.svg}" class="img-fluid"><span ></span> <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <form form-method="post" th:action="@{/logout}">
+                        <button type="submit" class="dropdown-item" >Sign out</button>
+                    </form>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            <div class="sidebar-sticky pt-3">
+                <ul class="nav flex-column">
+                    <!--                        <li class="nav-item">-->
+                    <!--                            <a  href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">-->
+                    <!--                                <div class="menu-img"><img src="../../static/organizations/assets/images/home_black.svg" class="img-fluid"></div> Home <i class="fa fa-angle-down" aria-hidden="true"></i></a>-->
+                    <!--                            <ul class="list-unstyled collapse" id="homeSubmenu" style="">-->
+                    <!--                                <li><a href="#" class="nav-link">Home 1</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 2</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 3</a></li>-->
+                    <!--                            </ul>-->
+                    <!--                        </li>-->
+                    <!--                        <li class="nav-item">-->
+                    <!--                            <a  href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">-->
+                    <!--                                <div class="menu-img"><img src="../../static/organizations/assets/images/person_black.svg" class="img-fluid"></div> Humans <i class="fa fa-angle-down" aria-hidden="true"></i></a>-->
+                    <!--                            <ul class="list-unstyled collapse" id="homeSubmenu1" style="">-->
+                    <!--                                <li><a href="#" class="nav-link">Home 1</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 2</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 3</a></li>-->
+                    <!--                            </ul>-->
+                    <!--                        </li>-->
+                    <!--                        <li class="nav-item">-->
+                    <!--                            <a  href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">-->
+                    <!--                                <div class="menu-img"><img src="../../static/organizations/assets/images/work_black.svg" class="img-fluid"></div> Business <i class="fa fa-angle-down" aria-hidden="true"></i></a>-->
+                    <!--                            <ul class="list-unstyled collapse" id="homeSubmenu2" style="">-->
+                    <!--                                <li><a href="#" class="nav-link">Home 1</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 2</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 3</a></li>-->
+                    <!--                            </ul>-->
+                    <!--                        </li>-->
+                    <!--                        <li class="nav-item">-->
+                    <!--                            <a  href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">-->
+                    <!--                                <div class="menu-img"><img src="../../static/organizations/assets/images/psychology_black.svg" class="img-fluid"></div> Technical <i class="fa fa-angle-down" aria-hidden="true"></i></a>-->
+                    <!--                            <ul class="list-unstyled collapse" id="homeSubmenu3" style="">-->
+                    <!--                                <li><a href="#" class="nav-link">Home 1</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 2</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 3</a></li>-->
+                    <!--                            </ul>-->
+                    <!--                        </li>-->
+                    <li class="nav-item mt-4 active">
+                        <a  href="#homeSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <div class="menu-img"><img th:src="@{/images/organization.png}" class="img-fluid"> </div> Organizations  <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                        <ul class="list-unstyled collapse" id="homeSubmenu4" style="">
+                            <li><a href="#" class="nav-link">Home 1</a></li>
+                            <li><a href="#" class="nav-link">Home 2</a></li>
+                            <li><a href="#" class="nav-link">Home 3</a></li>
+                        </ul>
+                    </li>
+                    <!--                        <li class="nav-item">-->
+                    <!--                            <a  href="#homeSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">-->
+                    <!--                                <div class="menu-img"><img src="../../static/organizations/assets/images/next_plan_black.svg" class="img-fluid"></div> Strategy <i class="fa fa-angle-down" aria-hidden="true"></i></a>-->
+                    <!--                            <ul class="list-unstyled collapse" id="homeSubmenu5" style="">-->
+                    <!--                                <li><a href="#" class="nav-link">Home 1</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 2</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 3</a></li>-->
+                    <!--                            </ul>-->
+                    <!--                        </li>-->
+                    <!--                        <li class="nav-item">-->
+                    <!--                            <a  href="#homeSubmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">-->
+                    <!--                                <div class="menu-img"><img src="../../static/organizations/assets/images/settings_black.svg" class="img-fluid"></div> Govern <i class="fa fa-angle-down" aria-hidden="true"></i></a>-->
+                    <!--                            <ul class="list-unstyled collapse" id="homeSubmenu6" style="">-->
+                    <!--                                <li><a href="#" class="nav-link">Home 1</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 2</a></li>-->
+                    <!--                                <li><a href="#" class="nav-link">Home 3</a></li>-->
+                    <!--                            </ul>-->
+                    <!--                        </li>-->
+                </ul>
+            </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main">
+            <div class="alert successMesage mt-3" id="messageDisappearing" th:if="${message}"  role="alert">
+                <!--/*@thymesVar id="message" type="message"*/-->
+                <span class="text-white" th:text="${message}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span class="text-white" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="col-md-12 dig-main-content">
+                <div class="row dig-title">
+                    <h1 class="col-md-6 col-sm-12 p-0">All Organizations <img th:src="@{/images/info_black.svg}" class="img-fluid"></h1>
+                    <div class="col-md-6 col-sm-12 book-icon p-0">
+                        <a href="#"><img th:src="@{/images/book.svg}" class="img-fluid"></a>
+                    </div>
+                </div>
+                <div class="row dig-filter">
+                    <div class="col-md-12 col-sm-12 p-0" style="height: 50px; display: flex;">
+                        <div class="col-md-6 ml-0 p-md-0">
+                            <input type="text" name="search" class="form-control search mt-2" placeholder="Search">
+                        </div>
+                        <div class="col-md-6 mr-0 p-md-0 displayFlex">
+                            <div style="width: 95%; height: 15px;">
+                                <button type="button" style="margin-left: 85%;"  class="btn btn-dark mt-2 mr-2" data-toggle="modal" data-target="#addOrganizationModal"><div class="fa fa-plus"></div> Add </button>
+                            </div>
+                            <div style="width: 5%; height: 15px;">
+                                <a>
+                                    <img id="clmnsShowAndHideClick" class="mt-2" th:src="@{/images/items.png}" href="" height="40" width="35" />
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <!--                            <a style="margin-left: 90%;" href="javascript:;" class="btn btn-dark mt-2" data-toggle="modal" data-target="#myModal"><div class="fa fa-plus"></div> Add </a>-->
+
+                        <!--                            <a>-->
+                        <!--                                <img id="clmnsShowAndHideClick" class="mt-2" th:src="@{/images/items.png}" href="" style="margin-top: 0%;" height="40" width="35" />-->
+                        <!--                            </a>-->
+                        <!--                            <div class="position-absolute mt-2 " id="clmnsShowAndHide" style="margin-left: 82%;  z-index: 9;  height: 330px; width: 18%; background-color: white;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">-->
+                        <!--                                <div class="mt-4" style="height: 30px; width: 100%;display: flex;">-->
+                        <!--                                   <div style="height: 20px; width: 12%;margin-left: 5%;">-->
+                        <!--                                       <input name="organizationLogo" type="checkbox" class="form-control" style="width: 100%; height: 20px;">-->
+                        <!--                                   </div>-->
+                        <!--                                   <div style="height: 20px; width: 85%;margin-left: 2%;">-->
+                        <!--                                       <span style="font-size: 15px;">Logo</span>-->
+                        <!--                                   </div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="mt-2" style="height: 30px; width: 100%;display: flex;">-->
+                        <!--                                    <div style="height: 20px; width: 12%;margin-left: 5%;">-->
+                        <!--                                        <input name="organizationName" type="checkbox" class="form-control" style="width: 100%; height: 20px;">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div style="height: 20px; width: 85%;margin-left: 2%;">-->
+                        <!--                                        <span style="font-size: 15px;">Name</span>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="mt-2" style="height: 30px; width: 100%;display: flex;">-->
+                        <!--                                    <div style="height: 20px; width: 12%;margin-left: 5%;">-->
+                        <!--                                        <input name="displayName" type="checkbox" class="form-control" style="width: 100%; height: 20px;">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div style="height: 20px; width: 85%;margin-left: 2%;">-->
+                        <!--                                        <span style="font-size: 15px;">Display Name</span>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="mt-2" style="height: 30px; width: 100%;display: flex;">-->
+                        <!--                                    <div style="height: 20px; width: 12%;margin-left: 5%;">-->
+                        <!--                                        <input name="link" type="checkbox" class="form-control" style="width: 100%; height: 20px;">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div style="height: 20px;width: 85%;margin-left: 2%;">-->
+                        <!--                                        <span style="font-size: 15px;">Website Link</span>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="mt-2" style="height: 30px; width: 100%;display: flex;">-->
+                        <!--                                    <div style="height: 20px; width: 12%;margin-left: 5%;">-->
+                        <!--                                        <input name="address" type="checkbox" class="form-control" style="width: 100%; height: 20px;">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div style="height: 20px; width: 85%;margin-left: 2%;">-->
+                        <!--                                        <span style="font-size: 15px;">Address</span>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="mt-2" style="height: 30px; width: 100%;display: flex;">-->
+                        <!--                                    <div style="height: 20px; width: 12%;margin-left: 5%;">-->
+                        <!--                                        <input name="timezone" type="checkbox" class="form-control" style="width: 100%; height: 20px;">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div style="height: 20px; width: 85%;margin-left: 2%;">-->
+                        <!--                                        <span style="font-size: 15px;">Timezone</span>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="mt-2" style="height: 30px; width: 100%;display: flex;">-->
+                        <!--                                    <div style="height: 20px; width: 12%;margin-left: 5%;">-->
+                        <!--                                        <input name="status" type="checkbox" class="form-control" style="width: 100%; height: 20px;">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div style="height: 20px; width: 85%;margin-left: 2%;">-->
+                        <!--                                        <span style="font-size: 15px;">Status</span>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="mt-2" style="height: 30px; width: 100%;display: flex;">-->
+                        <!--                                    <div style="height: 20px; width: 12%;margin-left: 5%;">-->
+                        <!--                                        <input name="action" type="checkbox" class="form-control" style="width: 100%; height: 20px;">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div style="height: 20px; width: 85%;margin-left: 2%;">-->
+                        <!--                                        <span style="font-size: 15px;">Action</span>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+
+                        <!--                            </div>-->
+
+                    </div>
+                </div>
+
+                <!--                    <div style="margin-bottom: 10%;">-->
+                <!--                        <input type="checkbox" name="organizationLogo" > Logo</input>-->
+                <!--                        <input type="checkbox" name="organizationName" > Name</input>-->
+                <!--                        <input type="checkbox" name="displayName" > Display Name</input>-->
+                <!--                        <input type="checkbox" name="address" > Address</input>-->
+                <!--                        <input type="checkbox" name="timezone" > Timezone</input>-->
+                <!--                        <input type="checkbox" name="link" > Link</input>-->
+                <!--                        <input type="checkbox" name="status" > Status</input>-->
+                <!--                    </div>-->
+                <div class="row dig-table position-relative ">
+
+                    <div class="table-responsive">
+
+                        <!--                            <table class="table table-bordered" id="exampletable">-->
+                        <table class="table table-bordered" id="organizationtable">
+
+
+                            <thead>
+
+                            <tr>
+                                <!--                                    <th>-->
+                                <!--                                        <div class="custom-checkbox">-->
+                                <!--                                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">-->
+                                <!--                                        </div>-->
+                                <!--                                    </th>-->
+                                <!--                                    <th class="organizationLogo">Logo</th>-->
+                                <th class="organizationName th_name" >Name</th>
+                                <th class="displayName">Display Name</th>
+                                <th class="address"> Address</th>
+                                <!--                                    <th class="timezone"> Timezone</th>-->
+                                <th class="link">Corporate Website</th>
+                                <th class="status">Status</th>
+                                <th class="action">Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="organizationsTable">
+                            <!--                                <tr th:each="organization: ${organizations}">-->
+                            <!--                                    <td>-->
+                            <!--                                        <div class="custom-checkbox">-->
+                            <!--                                            <input type="checkbox"  name="vehicle1" value="Bike">-->
+                            <!--                                        </div>-->
+                            <!--                                    </td>-->
+                            <!--                                    <td class="organizationLogo" id="logoPhotoButton" data-toggle="modal" data-target=".bd-example-modal-sm" th:href="${organization.logo}">-->
+
+                            <!--                                        &lt;!&ndash;/*@thymesVar id="logo" type="logo"*/&ndash;&gt;-->
+                            <!--                                        <img th:src="@{${'/upload/' + organization.logo}}" height="40" width="40" />-->
+                            <!--                                    </td>-->
+                            <!--                                    <td class="organizationName" th:text="${organization.name}"></td>-->
+                            <!--                                    <td class="displayName" th:text="${organization.displayName}"></td>-->
+                            <!--                                    <td class="address" th:text="${organization.address}"></td>-->
+                            <!--&lt;!&ndash;                                    <td class="timezone" th:text="${organization.timezone}"></td>&ndash;&gt;-->
+                            <!--                                    <td class="link" th:text="${organization.corporateWebsiteLink}"></td>-->
+                            <!--                                    <td class="status" th:if="${#strings.toString(organization.status)} == 'INACTIVE'">-->
+                            <!--                                        <p  class="danger" th:text=" ${organization.status}"><i class=" fa fa-circle"  aria-hidden="true"></i></p>-->
+                            <!--                                    </td>-->
+                            <!--                                    <td th:if="${#strings.toString(organization.status)} == 'ACTIVE'">-->
+                            <!--                                        <p  class="success" th:text="${organization.status}" ><i class=" fa fa-circle"  aria-hidden="true"></i></p>-->
+                            <!--                                    </td>-->
+                            <!--                                    <td class="action">-->
+                            <!--                                        <div class="dropdown">-->
+                            <!--                                            <button type="button" class="btn-action"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>-->
+                            <!--                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+                            <!--                                                <a th:href="@{/organization/find-organization/{id}(id=${organization.id})}"  data-toggle="modal" data-target="#editModal" id="editButton" class="dropdown-item"><img th:src="@{/images/edit.svg}" class="img-fluid"> Edit</a>-->
+                            <!--                                                <a th:if="${#strings.toString(organization.status)} == 'ACTIVE'" th:href="@{/organization/deactivate-status/{id}(id=${organization.id})}" data-toggle="modal" data-target="#deactivateStatusModal" id="deactivateStatusButton" class="dropdown-item"><img th:src="@{/images/disable.png}" class="status-img"> Deactivate</a>-->
+                            <!--                                                <a th:if="${#strings.toString(organization.status)} == 'INACTIVE'" th:href="@{/organization/activate-status/{id}(id=${organization.id})}" data-toggle="modal" data-target="#activateStatusModal" id="activateStatusButton" class="dropdown-item"><img th:src="@{/images/sign.png}" class="status-img"> Activate</a>-->
+
+                            <!--                                            </div>-->
+                            <!--                                        </div>-->
+                            <!--                                    </td>-->
+
+                            <!--                                </tr>-->
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!--Add Organization Modal -->
+<div class="modal fade add-view-modal fade add-view-modal-popup" id="addOrganizationModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Organization</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+
+
+            <form id="addOrganizationForm" class="needs-validation form" name="form"  novalidate>
+                <div class="modal-body dig-modal-body">
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" id="name" required class="form-control text-box"  placeholder="Organization name">
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Display Name</label>
+                                <input type="text" name="displayName" id="displayName" required class="form-control text-box"  placeholder="Display name of the organization for every identification">
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Corporate Website</label>
+                                <input type="text" name="corporateWebsiteLink" id="corporateWebsiteLink" required class="form-control text-box"  placeholder="Company website if any">
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control text-box" required name="description" id="description" rows="5" placeholder="Notes about the organization"></textarea>
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+
+                            <div class="form-group col-md-12 col-sm-12 ml-1">
+                                <label>Address</label>
+                                <input type="text" name="address" id="address" required class="form-control text-box"  placeholder="Location Address">
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12 ml-1">
+                                <label>Timezone</label>
+                                <select id="mySelectTimezone" placeholder="Timezone" name="timezone" autocomplete="off" class="form-control">
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+                            <!--                            <div class="form-group" style="display: flex;">-->
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label class="text-dark">Upload Logo</label>
+                                <input type="file" name="file" id="logo" required   class="form-control" >
+                                <div class="invalid-feedback">
+                                    Please Choose Profile Image
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-4" style="margin-left: 2%;">
+                                <label class="text-dark">Uploaded Logo</label>
+                                <div style="height: auto; width: 100%; border:1px solid gray;">
+                                    <img id="thumbnailLogo"   style="height: 110px; width: 100%;"   />
+                                </div>
+                            </div>
+                            <!--                            </div>-->
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer dig-modal-footer">
+                    <div class="row m-0">
+                        <div class="col-md-12 col-sm-12 save-button">
+                            <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+                            <button id="addOrganizationButton" type="button" class="btn btn-default btn-save"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--  All in one Modal (Edit organization, Add Subscription, Edit Subscription, Add User and Edit User -->
+<div class="modal fade add-view-modal fade add-view-modal-popup" id="editModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">View Changes</h4>
+                <button onclick="stopSubscriptionsList()" type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body dig-modal-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs bigtablist" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" href="#tab1" role="tab" data-toggle="tab">Edit</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tab4" role="tab" data-toggle="tab">Subscription</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tab2" role="tab" data-toggle="tab">Users</a></li>
+
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade show active" id="tab1">
+
+                        <form class="form" >
+
+                            <div class="modal-body dig-modal-body">
+
+
+                                <input type="hidden" readonly id="txtId" name="id" class="form-control text-box"  placeholder="Organization name">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" id="txtName" name="name" class="form-control text-box"  placeholder="Organization name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Display Name</label>
+                                                <input type="text" id="txtDisplayName" name="displayName" class="form-control text-box"  placeholder="Display name of the organization for every identification">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Corporate Website</label>
+                                                <input type="text" id="txtCorporateWebsiteLink" name="corporateWebsiteLink" class="form-control text-box"  placeholder="Company website if any">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" id="txtAddress" name="address" class="form-control text-box"  placeholder="Location Address">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea class="form-control text-box" id="txtDescription" name="description" rows="5" placeholder="Notes about the organization"></textarea>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+
+                                        <div class="form-group col-md-12 col-sm-12 ml-1">
+                                            <label>Current Timezone</label>
+                                            <input type="text" id="txtTimezone" name="timezone" readonly class="form-control text-box"  placeholder="Location Address">
+                                        </div>
+
+                                        <div class="form-group col-md-12 col-sm-12 ml-1">
+                                            <label>Timezone</label>
+                                            <select id="mySelectTimezoneEdit" placeholder="Timezone" name="timezone" autocomplete="off" class="form-control">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12">
+                                            <label class="text-dark">Upload Logo</label>
+                                            <input type="text" placeholder="Logo" readonly id="logoEdit"  class="form-control" >
+                                            <div class="invalid-feedback">
+                                                Please Choose Profile Image
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-4 col-sm-4" style="margin-left: 2%;">
+                                            <label class="text-dark">Current Logo</label>
+                                            <div style="height: auto; width: 100%; border:1px solid gray;">
+                                                <img id="thumbnailLogoEdit"   style="height: 110px; width: 100%;"   />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer dig-modal-footer">
+                                <div class="row m-0">
+                                    <div class="col-md-12 col-sm-12 save-button">
+                                        <button onclick="stopSubscriptionsList()" type="button" class="btn btn-default btn-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+                                        <button type="button" onclick="updateOrganization()" class="btn btn-default btn-save"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade show" id="tab2">
+                        <div class="row processes-row">
+                            <h4 class="col-md-6 col-sm-12">Users</h4>
+                            <div class="col-md-6 col-sm-12">
+                                <a href="javascript:;" class="btn-primary"><div class="plusicon"><img th:src="@{/images/plus.svg}" class="img-fluid"></div> Add</a>
+                            </div>
+                        </div>
+                        <div class="row m-0 dig-table">
+                            <table class="table table-bordered active-process-table" id="active-process-table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <th>Gender</th>
+                                    <th>Address</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Gasana</td>
+                                    <td>Theophile</td>
+                                    <td>Male</td>
+                                    <td>Rwanda, Kigali</td>
+                                    <td><p class="success"><i class="fa fa-circle" aria-hidden="true"></i> Active</p></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn-action" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <a class="dropdown-item" href="#">Edit</a>
+                                                <a class="dropdown-item" href="#">Deactivate</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade show" id="tab4">
+                        <div class="row processes-row">
+                            <h4 class="col-md-6 col-sm-12">Subscriptions</h4>
+                            <div class="col-md-6 col-sm-12">
+                                <a href="javascript:;" data-toggle="modal" data-target="#addSubscriptionModal" class="btn-primary"><div class="plusicon"><img th:src="@{/images/plus.svg}" class="img-fluid"></div> Add</a>
+                            </div>
+                        </div>
+                        <div class="row m-0 dig-table">
+                            <table class="table table-bordered active-process-table" id="active-process-table-subscriptions">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Subscription Plan</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody id="subscriptionTable">
+                                <!--                                    <tr>-->
+                                <!--                                        <td>Subscription 1</td>-->
+                                <!--                                        <td>2202-03-25</td>-->
+                                <!--                                        <td>2202-04-01</td>-->
+                                <!--                                        <td>Weekly</td>-->
+                                <!--                                        <td>1000$</td>-->
+                                <!--                                        <td><p class="success"><i class="fa fa-circle" aria-hidden="true"></i> Active</p></td>-->
+                                <!--                                        <td>-->
+                                <!--                                            <div class="dropdown">-->
+                                <!--                                                <button type="button" class="btn-action" id="dropdownMenuButtonSubscription" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>-->
+                                <!--                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
+                                <!--                                                    <a class="dropdown-item" href="#">Edit</a>-->
+                                <!--                                                    <a class="dropdown-item" href="#">Deactivate</a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                        </td>-->
+                                <!--                                    </tr>-->
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!--                <div class="modal-footer dig-modal-footer">-->
+            <!--                    <div class="row m-0">-->
+            <!--                        <div class="col-md-6 col-sm-12">-->
+            <!--                            <button type="button" class="btn btn-default btn-deactivate">Deactivate</button>-->
+            <!--                        </div>-->
+            <!--                        <div class="col-md-6 col-sm-12 save-button">-->
+            <!--                            <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>-->
+            <!--                            <button type="button" class="btn btn-default btn-save"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+        </div>
+    </div>
+</div>
+
+<!--Add Subscription Modal -->
+<div class="modal fade add-view-modal fade add-view-modal-popup" id="addSubscriptionModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Subscription</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+
+
+            <form id="addSubscriptionForm" class="needs-validation form" name="form"  novalidate>
+                <div class="modal-body dig-modal-body">
+                    <input type="hidden" id="organizationId" required name="organization" class="form-control text-box" value="">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" id="subscriptionName" required class="form-control text-box"  placeholder="Subscription Name">
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Frequency</label>
+                                <select required id="frequency" class="form-control input-sm" name="frequency">
+                                    <option th:each="frequency : ${T(com.java.techaffinity.digileaper.Enumeration.Frequency).values()}" th:value="${frequency}" th:text="${frequency.displayName}"></option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="number" name="amount" id="amount"  required class="form-control text-box"  placeholder="Amount">
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+
+                            <div class="form-group col-md-12 col-sm-12 ml-1">
+                                <label>Start Date</label>
+                                <input type="date" name="startDate" id="startDate" pattern="YYYY-MM-dd" required class="form-control text-box"  placeholder="start Date">
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12 ml-1">
+                                <label>End Date</label>
+                                <input type="date" name="endDate" id="endDate" pattern="YYYY-MM-dd" required class="form-control text-box"  placeholder="End Date">
+                                <div class="invalid-feedback">
+                                    Please Fill this field
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer dig-modal-footer">
+                    <div class="row m-0">
+                        <div class="col-md-12 col-sm-12 save-button">
+                            <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+                            <button id="addSubscriptionButton" type="button" class="btn btn-default btn-save"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--    &lt;!&ndash; Edit Modal &ndash;&gt;-->
+<!--    <div class="modal fade add-view-modal fade add-view-modal-popup" id="editModal" role="dialog">-->
+<!--        <div class="modal-dialog">-->
+<!--            &lt;!&ndash; Modal content&ndash;&gt;-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h4 class="modal-title">Edit Organization</h4>-->
+<!--                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+<!--                </div>-->
+<!--                <form th:action="@{/api/organization/editOrganization}" class="form"  method="put" >-->
+<!--                    <div class="modal-body dig-modal-body">-->
+<!--                     <ul class="nav nav-tabs bigtablist" role="tablist">-->
+<!--                        <li class="nav-item"><a class="nav-link active" href="#tab1" role="tab" data-toggle="tab">General</a></li>-->
+<!--                        <li class="nav-item"><a class="nav-link" href="#tab2" role="tab" data-toggle="tab">Subscription</a></li>-->
+<!--                        <li class="nav-item"><a class="nav-link" href="#tab3" role="tab" data-toggle="tab">Users</a></li>-->
+<!--                    </ul>-->
+
+<!--                        <input type="hidden" id="txtId" name="id" class="form-control text-box"  placeholder="Organization name">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-6 col-sm-12">-->
+<!--                                <div class="col-md-12">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label>Name</label>-->
+<!--                                        <input type="text" id="txtName" name="name" class="form-control text-box"  placeholder="Organization name">-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label>Display Name</label>-->
+<!--                                        <input type="text" id="txtDisplayName" name="displayName" class="form-control text-box"  placeholder="Display name of the organization for every identification">-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label>Corporate Website</label>-->
+<!--                                        <input type="text" id="txtCorporateWebsiteLink" name="corporateWebsiteLink" class="form-control text-box"  placeholder="Company website if any">-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label>Address</label>-->
+<!--                                        <input type="text" id="txtAddress" name="address" class="form-control text-box"  placeholder="Location Address">-->
+<!--                                    </div>-->
+
+<!--                                    <div class="form-group">-->
+<!--                                        <label>Description</label>-->
+<!--                                        <textarea class="form-control text-box" id="txtDescription" name="description" rows="5" placeholder="Notes about the organization"></textarea>-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 col-sm-12">-->
+
+<!--                                <div class="form-group col-md-12 col-sm-12 ml-1">-->
+<!--                                    <label>Current Timezone</label>-->
+<!--                                    <input type="text" id="txtTimezone" readonly class="form-control text-box"  placeholder="Location Address">-->
+<!--                                </div>-->
+
+<!--                                <div class="form-group col-md-12 col-sm-12 ml-1">-->
+<!--                                    <label>Timezone</label>-->
+<!--                                    <select id="mySelectTimezoneEdit" placeholder="Timezone" name="timezone" autocomplete="off" class="form-control">-->
+<!--                                        <option th:value="${null}">-SELECT-</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="form-group col-md-12 col-sm-12">-->
+<!--                                    <label class="text-dark">Upload Logo</label>-->
+<!--                                    <input type="text" placeholder="Logo" readonly id="logoEdit"  class="form-control" >-->
+<!--                                    <div class="invalid-feedback">-->
+<!--                                        Please Choose Profile Image-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                    <div class="form-group col-md-4 col-sm-4" style="margin-left: 2%;">-->
+<!--                                        <label class="text-dark">Current Logo</label>-->
+<!--                                        <div style="height: auto; width: 100%; border:1px solid gray;">-->
+<!--                                            <img id="thumbnailLogoEdit"   style="height: 110px; width: 100%;"   />-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                    <div class="modal-footer dig-modal-footer">-->
+<!--                        <div class="row m-0">-->
+<!--                            <div class="col-md-12 col-sm-12 save-button">-->
+<!--                                <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>-->
+<!--                                <button type="submit" class="btn btn-default btn-save"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+<!-- Deactivate Modal -->
+<div class="modal fade add-view-modal" id="deactivateStatusModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header deactivate-status-modal">
+                <h4 class="modal-title text-white">Change Status</h4>
+                <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h6>Are you sure you want to Deactivate This Organization ?</h6>
+            </div>
+            <div class="modal-footer">
+                <a href="" id="confirmDeactivateStatusButton" class="btn text-white deactivate-status-modal">Deactivate</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Activate Modal -->
+<div class="modal fade add-view-modal" id="activateStatusModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header activate-status-modal">
+                <h4 class="modal-title text-white">Change Status</h4>
+                <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h6>Are you sure you want to Activate This Organization ?</h6>
+            </div>
+            <div class="modal-footer">
+                <!--                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>-->
+                <a href="" id="confirmActivateStatusButton" class="btn text-white activate-status-modal">Activate</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Change Logo Modal    -->
+<div class="modal fade bd-example-modal-sm" id="changeLogoModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Change Logo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--                    <div class="logoTitles mt-1 displayFlex">-->
+                <!--                        <div class="logoTitle">-->
+                <!--                            <h6 class="text-center text-capitalize">Current Logo</h6>-->
+                <!--                        </div>-->
+                <!--                        <div class="logoTitle">-->
+                <!--                            <h6 class="text-center text-capitalize">Selected Logo</h6>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <div class="displayFlex">
+                    <div class="logoBox ml-2 mt-2">
+
+                        <img id="logoPhoto" src="" height="118" width="123">
+                    </div>
+                    <div class="logoBox ml-2 mt-2">
+                        <img id="thumbnailLogoChange"   height="118" width="123"   />
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <input type="file" name="file"  id="logoChange" required   class="chooseFileHide ml-2" >
+                    <div class="invalid-feedback">
+                        Please Choose Profile Image
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer dig-modal-footer">
+                <div class="row m-0">
+                    <div class="col-md-12 col-sm-12 save-button">
+                        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+                        <button type="submit" class="btn btn-default btn-save"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!--        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>-->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/organizations-modal.js}"></script>
+<script th:src="@{/js/timezone.js}"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.organizationsTable').dataTable({
+            language: { search: '', searchPlaceholder: "Search" },
+            "bLengthChange" : false,
+            "ordering": false,
+            "dom": '<"pull-left"f><"pull-right"l>tip'
+        });
+        $('#active-process-table').dataTable({
+            "bLengthChange" : false,
+            "ordering": false,
+            "searching": false
+        });
+    });
+</script>
+
+<script>
+    let organizationId;
+    $(document).ready(function () {
+
+        getAllOrganizations();
+
+        // Save organization with Ajax method
+        $('#addOrganizationButton').click(function () {
+            $.ajax({
+                type: "POST",
+                url: "organization",
+                data:{
+                    name : $('#name').val(),
+                    displayName: $('#displayName').val(),
+                    corporateWebsiteLink: $('#corporateWebsiteLink').val(),
+                    address : $('#address').val(),
+                    timezone: $('#mySelectTimezone').val(),
+                    description: $('#description').val()
+                },
+                success: function (result) {
+                    $('#addOrganizationForm')[0].reset()
+                    successAlert();
+                    getAllOrganizations();
+                },
+                error : function (err) {
+                    alert('Adding organization Error '+err);
+                }
+            });
+        });
+
+    });
+    //End of Save organization with Ajax method
+
+    // Alert that shows data have been saved into database
+    function successAlert(){
+        swal({
+            title: "Successfully Added!",
+            // text: "You clicked the button!",
+            icon: "success",
+            button: "Close",
+            timer: 2000
+        });
+    }
+    //End of Alert that shows data have been saved into database
+
+    // Fetch Organizations from database and reload them into table
+    var data = "";
+    function getAllOrganizations() {
+
+        $.ajax({
+            type : "GET",
+            url : "organization/list",
+            success : function(response) {
+                data = response
+
+                $('.tr').remove();
+                for (i = 0; i < data.length; i++) {
+                    if(data[i].status=='INACTIVE'){
+                        $("#organizationtable")
+                            .append(
+                                '<tr class="tr"> <td>'
+                                + data[i].displayName
+                                + '</td> <td>'
+                                + data[i].name
+                                + '</td> <td>'
+                                + data[i].address
+                                + '</td><td>'
+                                + data[i].corporateWebsiteLink
+                                + '</td> <td class="text-danger"><i class="fa fa-circle danger mr-1"></i>'
+                                + data[i].status
+                                + '</td> ' +
+                                '<td>' +
+                                '<button type="button" class="btn-action" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>'
+                                +'<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a onclick="editOrganization('+data[i].id+')"  data-toggle="modal" data-target="#editModal" id="editButton"  class="dropdown-item" href="#"><img src="/images/edit.svg" class="img-fluid"> Edit</a><a class="dropdown-item" onclick="activateOrganization('+data[i].id+')"><img src="/images/sign.png" class="status-img"> Activate</a></div>'+
+                                '</td>'
+                                +
+                                '</tr>');
+                    }else{
+                        $("#organizationtable")
+                            .append(
+                                '<tr class="tr"> <td>'
+                                + data[i].displayName
+                                + '</td> <td>'
+                                + data[i].name
+                                + '</td> <td>'
+                                + data[i].address
+                                + '</td><td>'
+                                + data[i].corporateWebsiteLink
+                                + '</td> <td class="text-success"><i class="fa fa-circle success mr-1"></i>'
+                                + data[i].status
+                                + '</td> ' +
+                                '<td>' +
+                                '<button type="button" class="btn-action" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>'
+                                +'<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a onclick="editOrganization('+data[i].id+')"  data-toggle="modal" data-target="#editModal" id="editButton"  class="dropdown-item" href="#">' +
+                                '<img src="/images/edit.svg" class="img-fluid"> Edit</a><a class="dropdown-item" onclick="deactivateOrganization('+data[i].id+')">' +
+                                '<img src="/images/disable.png" class="status-img"> Deactivate</a></div>'+
+                                '</td>'
+                                +
+                                '</tr>');
+                    }
+                }
+            },
+            error : function(err) {
+                alert("error is" + err)
+            }
+        });
+    }
+    // End of Fetch Organizations from database and reload them into table
+
+
+    // Edit click and populate the modal with data
+    function editOrganization(id) {
+        organizationId = id;
+
+        $.ajax({
+            type : "GET",
+            url : "organization/find-organization/" + id,
+            dataType : 'json',
+            success : function(response) {
+                $("#txtId").val(response.id),
+                    $("#organizationId").val(response.id),
+                    $("#txtName").val(response.name),
+                    $("#txtDisplayName").val(response.displayName),
+                    $("#txtTimezone").val(response.timezone),
+                    $("#txtAddress").val(response.address),
+                    $("#txtCorporateWebsiteLink").val(response.corporateWebsiteLink ),
+                    $("#txtDescription").val(response.description)
+                getAllSubscriptions();
+
+            },
+
+            error : function(err) {
+                alert("error is" + err)
+            }
+        });
+    }
+    //End of Edit click and populate the modal with data
+
+
+    // Updating organization with real data from ajax
+    function updateOrganization() {
+        $.ajax({
+            type : "POST",
+            url : "organization/edit",
+            data : {
+                id : $("#txtId").val(),
+                name : $("#txtName").val(),
+                displayName : $("#txtDisplayName").val(),
+                corporateWebsiteLink : $("#txtCorporateWebsiteLink").val(),
+                description : $("#txtDescription").val(),
+                timezone : $("#mySelectTimezoneEdit").val(),
+                address : $("#txtAddress").val()
+
+            },
+
+            success : function(result) {
+                getAllOrganizations();
+                getAllSubscriptions();
+                updateAlert();
+            },
+            error : function(err) {
+                alert("error is" + err)
+            }
+        });
+    }
+    //End of Updating organization with real data from ajax
+
+    // Alert that shows data have been updated into database
+    function updateAlert(){
+        swal({
+            title: "Successfully Updated!",
+            // text: "You clicked the button!",
+            icon: "success",
+            button: "Close",
+            timer: 2000
+        });
+    }
+
+    // Activate organization Status
+    function activateOrganization(id) {
+        $.ajax({
+            type: "POST",
+            url : "organization/activate-status/" + id,
+            success : function(response) {
+                getAllOrganizations();
+                activateOrganizationAlert();
+            },
+            error : function(err) {
+                alert("error is" + err)
+            }
+        });
+    }
+    //End of Activate organization Status
+
+    // Deactivate organization Status
+    function deactivateOrganization(id) {
+        $.ajax({
+            type: "POST",
+            url : "organization/deactivate-status/" + id,
+            success : function(response) {
+                getAllOrganizations();
+                deactivateOrganizationAlert();
+            },
+            error : function(err) {
+                alert("error is" + err)
+            }
+        });
+    }
+    //End of Deactivate organization Status
+
+    // Alert that shows that status have been activated
+    function activateOrganizationAlert(){
+        swal({
+            title: "Status Activated Successfully!",
+            // text: "You clicked the button!",
+            icon: "success",
+            button: "Close",
+            timer: 2000
+        });
+    }
+    //End of Alert that shows that status have been activated
+
+    // Alert that shows that status have been Deactivated
+    function deactivateOrganizationAlert(){
+        swal({
+            title: "Status Deactivated Successfully!",
+            // text: "You clicked the button!",
+            icon: "success",
+            button: "Close",
+            timer: 2000
+        });
+    }
+
+    //             END OF ORGANIZATION FUNCTIONALITIES
+    //--------------------------------------------------------------------------------------------------------------------------
+
+    //    Saving subscription using ajax method
+    $('#addSubscriptionButton').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "admin/organizations/"+organizationId+"/subscriptions",
+            data:{
+                name : $('#subscriptionName').val(),
+                amount : $('#amount').val(),
+                frequency: $('#frequency').val(),
+                startDate : $('#startDate').val(),
+                endDate: $('#endDate').val(),
+                organization: $('#organizationId').val()
+            },
+            success: function (result) {
+                $('#addSubscriptionForm')[0].reset()
+                successAlert();
+                getAllSubscriptions();
+            },
+            error : function (err) {
+                alert('Adding subscription Error '+err);
+            }
+        });
+    });
+    //End of Saving subscription using ajax method
+
+    // Fetch Subscriptions from database and reload them into table
+    var data = "";
+    function getAllSubscriptions() {
+
+        var fetchSubscriptionsRequest =   $.ajax({
+            type : "GET",
+            url : "admin/organizations/"+organizationId+"/subscriptions",
+            success : function(response) {
+                data = response
+
+                $('.tr').remove();
+                for (i = 0; i < data.length; i++) {
+
+                    // Start Date and End Date formatting
+                    var sdate = new Date(data[i].startDate);
+                    var edate = new Date(data[i].endDate);
+                    var startDate  = sdate.getFullYear() + '-' + (sdate.getMonth() + 1) + '-' + sdate.getDate();
+                    var endDate  = edate.getFullYear() + '-' + (edate.getMonth() + 1) + '-' + edate.getDate();
+                    if(data[i].status=='INACTIVE'){
+                        $("#subscriptionTable")
+                            .append(
+                                '<tr class="tr"> <td>'
+                                + data[i].name
+                                + '</td> <td>'
+                                + startDate
+                                + '</td> <td>'
+                                + endDate
+                                + '</td><td>'
+                                + data[i].frequency
+                                + '</td> <td>'
+                                + data[i].amount
+                                + '</td> <td class="text-danger"><i class="fa fa-circle danger mr-1"></i>'
+                                + data[i].status
+                                + '</td> ' +
+                                '<td>' +
+                                '<button type="button" class="btn-action" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>'
+                                +'<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a onclick="editOrganization('+data[i].id+')"  data-toggle="modal" data-target="#editModal" id="editButton"  class="dropdown-item" href="#">' +
+                                '<img src="/images/edit.svg" class="img-fluid"> Edit</a><a class="dropdown-item" onclick="activateSubscription('+data[i].id+')">' +
+                                '<img src="/images/sign.png" class="status-img"> Activate</a></div>'+
+                                '</td>'
+                                +
+                                '</tr>');
+                    }else{
+                        $("#subscriptionTable")
+                            .append(
+                                '<tr class="tr"> <td>'
+                                + data[i].name
+                                + '</td> <td>'
+                                + startDate
+                                + '</td> <td>'
+                                + endDate
+                                + '</td><td>'
+                                + data[i].frequency
+                                + '</td> <td>'
+                                + data[i].amount
+                                + '</td> <td class="text-success"><i class="fa fa-circle success mr-1"></i>'
+                                + data[i].status
+                                + '</td> ' +
+                                '<td>' +
+                                '<button type="button" class="btn-action" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>'
+                                +'<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a onclick="editOrganization('+data[i].id+')"  data-toggle="modal" data-target="#editModal" id="editButton"  class="dropdown-item" href="#">' +
+                                '<img src="/images/edit.svg" class="img-fluid"> Edit</a><a class="dropdown-item" onclick="deactivateSubscription('+data[i].id+')">' +
+                                '<img src="/images/disable.png" class="status-img danger text-danger"> Deactivate</a></div>'+
+                                '</td>'
+                                +
+                                '</tr>');
+
+                    }
+
+                }
+            },
+            error : function(err) {
+                alert("error is" + err)
+            }
+        });
+    }
+    // End of Fetch Subscriptions from database and reload them into table
+
+
+
+    // Activate Subscription Status
+    function activateSubscription(id) {
+        $.ajax({
+            type: "POST",
+            url : "admin/organizations/"+organizationId+"/subscriptions/activate-status/"+id,
+            success : function(response) {
+                getAllSubscriptions();
+                activateSubscriptionAlert();
+            },
+            error : function(err) {
+                alert("error is" + err)
+            }
+        });
+    }
+    //End of Activate Subscription Status
+
+    // Deactivate Subscription Status
+    function deactivateSubscription(id) {
+        $.ajax({
+            type: "POST",
+            url : "admin/organizations/"+organizationId+"/subscriptions/deactivate-status/"+id,
+            success : function(response) {
+                getAllSubscriptions();
+                deactivateSubscriptionAlert();
+            },
+            error : function(err) {
+                alert("error is" + err)
+            }
+        });
+    }
+    //End of Deactivate Subscription Status
+
+    // Alert that shows that subscription status have been activated
+    function activateSubscriptionAlert(){
+        swal({
+            title: "Status Activated Successfully!",
+            // text: "You clicked the button!",
+            icon: "success",
+            button: "Close",
+            timer: 2000
+        });
+    }
+    //End of Alert that shows that subscription status have been activated
+
+    // Alert that shows that subscription status have been deactivated
+    function deactivateSubscriptionAlert(){
+        swal({
+            title: "Status Deactivated Successfully!",
+            // text: "You clicked the button!",
+            icon: "success",
+            button: "Close",
+            timer: 2000
+        });
+    }
+    //End of Alert that shows that subscription status have been deactivated
+
+
+    function stopSubscriptionsList(){
+        fetchSubscriptionsRequest.abort();
+        getAllOrganizations();
+    }
+
+</script>
+
+
+
+<script type="text/javascript">
+    // close the div in 5 secs
+    window.setTimeout("closeHelpDiv();", 3000);
+
+    function closeHelpDiv(){
+        // document.getElementById("messageDisappearing").style.display=" none";
+        document.getElementById("messageDisappearing");
+
+
+    }
+</script>
+<script>
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+<script type="text/javascript">
+    for (i = 0; i < timezones.length; i++)
+    {
+        $('#mySelectTimezoneEdit').append($('<option>',
+            {
+                value: timezones[i].Timezone+" "+timezones[i].UTC,
+                text : timezones[i].Timezone+" "+timezones[i].UTC
+            }));
+    }
+</script>
+<script type="text/javascript">
+    for (i = 0; i < timezones.length; i++)
+    {
+        console.log("timezone "+timezones);
+        $('#mySelectTimezone').append($('<option>',
+            {
+                value: timezones[i].Timezone+" "+timezones[i].UTC,
+                text : timezones[i].Timezone+" "+timezones[i].UTC
+            }));
+    }
+</script>
+<!-- Add organization show image selected   -->
+<script>
+    logo.onchange = evt => {
+        const [file] = logo.files
+        if (file) {
+            thumbnailLogo.src = URL.createObjectURL(file)
+        }
+    }
+</script>
+
+<!-- Edit organization show image selected   -->
+
+<script>
+    logoEdit.onchange = evt => {
+        const [file] = logoEdit.files
+        if (file) {
+            thumbnailLogoEditAdd.src = URL.createObjectURL(file)
+        }
+    }
+</script>
+
+<!-- Change Logo show image selected   -->
+<script>
+    logoChange.onchange = evt => {
+        const [file] = logoChange.files
+        if (file) {
+            thumbnailLogoChange.src = URL.createObjectURL(file)
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function(){
+        $(".slide-toggle").click(function(){
+            $(".columns_showAndHide_box").slideToggle();
+        });
+    });
+</script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<script>
+    $("input:checkbox").attr("checked",false).click(function () {
+        var shcolumn = "."+$(this).attr("name");
+        $(shcolumn).toggle();
+    })
+</script>
+<script>
+    $("#clmnsShowAndHideClick" ).click(function() {
+        $( "#clmnsShowAndHide" ).toggle();
+    });
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+</html>

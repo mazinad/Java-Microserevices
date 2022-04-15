@@ -1,5 +1,5 @@
 server:
-  port: 8286
+  port: 9296
 
 spring:
   application:
@@ -8,5 +8,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/mazinad/Java-Microserevices
+          uri: https://github.com/shabbirdwd53/config-server
           clone-on-start: true

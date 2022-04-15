@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class DepartmentService {
@@ -20,5 +22,13 @@ public class DepartmentService {
     public Department getDepartment(Long id) {
         logger.info("Getting department");
         return departmentRepository.findByDepartmentId(id);
+    }
+
+    public List<Department> fetchAllDepartments() {
+        return departmentRepository.findAll();
+    }
+
+    public void deleteDepartment(Long departmentId) {
+      departmentRepository.deleteById(departmentId);
     }
 }

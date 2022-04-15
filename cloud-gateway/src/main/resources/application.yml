@@ -35,3 +35,14 @@ resilience4j:
       traceId:
         maxRetryAttempts: 3
         waitDuration: 2s
+
+eureka:
+  client:
+  register-with-eureka: true
+  fetch-registry: true
+  service-url:
+    defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+  healthcheck:
+    enabled: true

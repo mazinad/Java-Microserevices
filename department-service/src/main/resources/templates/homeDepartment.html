@@ -1,0 +1,292 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Department</title>
+
+    <link href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"
+          rel="stylesheet"
+          type="text/css"/>
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          rel="stylesheet"/>
+    <!--		Link Mdb-->
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link " href="#" th:href="@{/homeUser}">User </a>
+            <a class="nav-item nav-link " href="#" th:href="@{/homeDepartment}">Department </a>
+        </div>
+    </div>
+</nav>
+<br>
+<br>
+<div class="container">
+
+    <h3>Department</h3>
+
+    <hr/>
+    <a class="btn btn-primary" data-target="#addModal" data-toggle="modal">Add Department</a>
+    <br/><br/>
+    <table class="table table-bordered table-striped" id="departmentTable">
+
+        <thead>
+        <tr>
+            <th>Department Name</th>
+            <th>Department Address</th>
+            <th>Department Code</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+<!--        <tr >-->
+
+<!--            <td th:text="${course.course_name}"></td>-->
+<!--            <td th:text="${course.credits}"></td>-->
+<!--            <td data-target="#addModal"><a class="btn btn-primary" id="editButton"-->
+<!--                                           th:href="@{/showFormForUpdate/{id}(id=${course.course_id})}"> Update</a>-->
+<!--                <a class="btn btn-danger"-->
+<!--                   th:href="@{/deleteEmployee/{id}(id=${course.course_id})}"> Delete</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+        </tbody>
+
+    </table>
+</div>
+<!--Modal-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add  Deparment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" class="needs-validation" method="POST" id="addDepartment"
+                      novalidate>
+                    <input type="hidden" name="course_id" id="idEdit" class="form-control" readonly>
+                    <div class="form-group">
+                        <label class="form-label">department Name</label>
+                        <input class="form-control mb-4 col-4" id="departmentName" name="departmentName" placeholder="departmentName" required
+                               type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">department Address</label>
+                        <input class="form-control mb-4 col-4" id="departmentAddress" name="departmentAddress" placeholder="departmentAddress" required
+                               type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">department Code</label>
+                        <input class="form-control mb-4 col-4" id="departmentCode" name="departmentCode" placeholder="departmentCode" required
+                               type="text">
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Start Of Editing Modal-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Update Deparment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" class="needs-validation" method="POST" id="updateDepartment"
+                      novalidate>
+                    <input type="hidden" name="departmentId" id="departmentId" class="form-control" readonly>
+                    <div class="form-group">
+                        <label class="form-label">department Name</label>
+                        <input class="form-control mb-4 col-4" id="nameUpdate" name="nameUpdate" placeholder="departmentName" required
+                               type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">department Address</label>
+                        <input class="form-control mb-4 col-4" id="addressUpdate" name="addressUpdate" placeholder="departmentAddress" required
+                               type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">department Code</label>
+                        <input class="form-control mb-4 col-4" id="codeUpdate" name="codeUpdate" placeholder="departmentCode" required
+                               type="text">
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit"  onclick="updateDepartment()" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!--CDN LINK FOR DATATABLE-->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#courseTable").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
+        });
+    })
+</script>
+<script>
+    let departmentId;
+    $(document).ready(
+        function() {
+
+            // SUBMIT FORM
+            $("#addDepartment").submit(function(event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                getAllDepartments();
+                ajaxPost();
+            });
+
+            function ajaxPost() {
+
+                // PREPARE FORM DATA
+                const formData = {
+                    departmentName : $("#departmentName").val(),
+                    departmentAddress : $("#departmentAddress").val(),
+                    departmentCode : $("#departmentCode").val()
+                }
+
+                // DO POST
+                $.ajax({
+                    type : "POST",
+                    contentType : "application/json",
+                    url : "/departments/save-department",
+                    data : JSON.stringify(formData),
+                    dataType : 'json',
+                    success : function(result) {
+                        if (result) {
+                            alert("Department saved Successfully");
+                        } else {
+                            alert("An error occured occured");
+                            getAllDepartments();
+                        }
+                        console.log(result);
+                    },
+                    error : function(e) {
+                        alert("Error!")
+                        console.log("ERROR: ", e);
+                    }
+                });
+
+            }
+
+        });
+    let formData = "";
+    function getAllDepartments() {
+
+        $.ajax({
+            type : "GET",
+            url : "/departments/allDepartments",
+            success : function(response) {
+                formData = response
+
+                $('.tr').remove();
+                for (i = 0; i < formData.length; i++) {
+
+                        $("#departmentTable")
+                            .append(
+                                '<tr class="tr"> <td>'
+                                +  formData[i].departmentName
+                                + '</td> <td>'
+                                +  formData[i].departmentAddress
+                                + '</td> <td>'
+                                + formData[i].departmentCode
+                                +'</td> <td>'
+                                + '<a data-target="#editModal" data-toggle="modal" id="editButton" onclick="editDepartment('+formData[i].departmentId+')" title="Edit" class="btn btn-success btn-xs"> <i class="fa fa-edit "></i></a>'
+                                +
+                                '<a onclick="deleteDepartment('+formData[i].departmentId+')" title="Remove Student" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o "></i></a>'
+                                +
+                                '</td>'
+                                +
+                                '</tr>');
+
+                }
+                console.log(formData);
+            },
+                    error : function(err) {
+                        alert("error is" + err)
+                    }
+                });
+        }
+    function editDepartment(id) {
+       departmentId = id;
+
+        $.ajax({
+            type : "GET",
+            url : "/departments/" + id,
+            dataType : 'json',
+            success : function(response) {
+                $("#departmentId").val(response.id),
+                    $("#departmentId").val(response.id),
+                    $("#departmentName").val(response.nameUpdate),
+                    $("#departmentAddress").val(response.addressUpdate),
+                    $("#departmentCode").val(response.codeUpdate),
+            },
+
+            error : function(err) {
+                alert("error is" + err)
+            }
+        });
+    }
+    function updateDepartment() {
+        $.ajax({
+            type : "POST",
+            url : "/departments/save-department",
+            data : {
+                departmentName : $("#departmentName").val(),
+                departmentAddress : $("#departmentAddress").val(),
+                departmentCode : $("#departmentCode").val()
+
+            },
+
+            success : function(result) {
+               if(result){
+                   alert("Updated Successfully");
+                   getAllDepartments();
+               }
+
+            },
+            error : function(err) {
+                alert("error is" + err)
+            }
+        });
+    }
+    function deleteDepartment(id){
+        departmentId=id;
+        $.ajax({
+            type:"DELETE",
+            url:"/departments/deleteDepartment/"+id,
+            success:function(result){
+                if(result){
+                 alert("Department Deleted");
+                 getAllDepartments();
+                }
+            },
+                error: function(e) {
+                alert("The error is" +e);
+                }
+        })
+    }
+</script>
+</body>
+
+</html>
