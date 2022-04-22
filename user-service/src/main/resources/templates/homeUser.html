@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Department</title>
+    <title>User</title>
 
     <link href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"
           rel="stylesheet"
@@ -12,14 +12,12 @@
           rel="stylesheet"/>
     <!--		Link Mdb-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
-    <style>
-        .error{
-            color: darkred;
-            font-style: italic;
-        }
-    </style>
+<style>
+    .error{
+        color: darkred;
+        font-style: italic;
+    }
+</style>
 </head>
 
 <body>
@@ -35,18 +33,19 @@
 <br>
 <div class="container">
 
-    <h3>Department</h3>
+    <h3>User</h3>
 
     <hr/>
-    <a class="btn btn-primary" data-target="#addModal" data-toggle="modal">Add Department</a>
+    <a class="btn btn-primary" data-target="#addModal" data-toggle="modal">Add User</a>
     <br/><br/>
-    <table class="table table-bordered table-striped" id="departmentTable">
+    <table class="table table-bordered table-striped" id="userTable">
 
         <thead>
         <tr>
+            <th>User Name</th>
+            <th>email</th>
+            <th>Password</th>
             <th>Department Name</th>
-            <th>Department Address</th>
-            <th>Department Code</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -70,83 +69,96 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add  Deparment</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add  User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" class="needs-validation" method="POST" id="addDepartment"
-                      novalidate>
-                    <input type="hidden" name="course_id" id="idEdit" class="form-control" readonly>
+                <form action="#" class="needs-validation" method="POST" id="addUser"
+                      >
                     <div class="form-group">
-                        <label class="form-label" for="departmentName">department Name</label>
-                        <input class="form-control mb-4 col-4" id="departmentName" name="departmentName"  required
+                        <label class="form-label"for="userName">User Name</label>
+                        <input class="form-control mb-4 col-4" id="userName" name="userName"  required
                                type="text">
                         <div class="invalid-feedback">
-                            Please Fill the field
+                            Please Fill this field
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="departmentAddress">department Address</label>
-                        <input class="form-control mb-4 col-4" id="departmentAddress" name="departmentAddress"  required
+                        <label class="form-label" for="email">Email</label>
+                        <input class="form-control mb-4 col-4" id="email" name="email"  required
                                type="text">
                         <div class="invalid-feedback">
-                            Please Fill the field
+                            Please Fill this field
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="departmentCode">department Code</label>
-                        <input class="form-control mb-4 col-4" id="departmentCode" name="departmentCode" required
+                        <label class="form-label" for="password">Password</label>
+                        <input class="form-control mb-4 col-4" id="password" name="password" required
                                type="text">
                         <div class="invalid-feedback">
-                            Please Fill the field
+                            Please Fill this field
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Department: </label>
+                        <select class="form-control-sm" id="departmentEdit" name="departmentId"
+                                required>
+                                <option>Nothing Selected</option>
+                        </select>
                     </div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" id="save" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 <!--Start Of Editing Modal-->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModalButton" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="updateModalLabel">Update Deparment</h5>
+                <h5 class="modal-title" id="exampleModal1Label">Update  User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" class="needs-validation" id="editDepartment" method="POST"
-                      novalidate>
-                    <input type="hidden" name="departmentId" id="idUpdate" class="form-control" readonly>
+                <form action="#" class="needs-validation" id="editUser"
+                      >
+                    <input type="hidden" readonly id="idUpdate" name="userId">
                     <div class="form-group">
-                        <label class="form-label"for="nameUpdate">department Name</label>
-                        <input class="form-control mb-4 col-4" id="nameUpdate" name="departmentName"  required
+                        <label class="form-label" for="userNameUpdate">User Name</label>
+                        <input class="form-control mb-4 col-4" id="userNameUpdate" name="userName"  required
                                type="text">
                         <div class="invalid-feedback">
-                            Please Fill the field
+                            Please Fill this field
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="addressUpdate">department Address</label>
-                        <input class="form-control mb-4 col-4" id="addressUpdate" name="departmentAddress"  required
-                               type="text">
+                        <label class="form-label" for="emailUpdate">Email</label>
+                        <input class="form-control mb-4 col-4" id="emailUpdate" name="email"  required
+                               type="email">
                         <div class="invalid-feedback">
-                            Please Fill the field
+                            Please Fill this field
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label"for="codeUpdate">department Code</label>
-                        <input class="form-control mb-4 col-4" id="codeUpdate" name="departmentCode"  required
+                        <label class="form-label" for="passwordUpdate">Password</label>
+                        <input class="form-control mb-4 col-4" id="passwordUpdate" name="password" required
                                type="text">
                         <div class="invalid-feedback">
-                            Please Fill the field
+                            Please Fill this field
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Department: </label>
+                        <select class="form-control-sm" id="departmentUpdate" name="departmentId"
+                                required>
+                            <option>Nothing selected</option>
+                        </select>
                     </div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Update</button>
@@ -163,7 +175,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
 <script>
     $(document).ready(function () {
-        $("#departmentTable").DataTable({
+        $("#userTable").DataTable({
             'aoColumnDefs': [{
                 'bSortable': false,
                 'aTargets': [-1] /* 1st one, start by the right */
@@ -174,73 +186,79 @@
 <script>
     $(document).ready(
         function() {
-            getAllDepartments();
+            loadAllDepartments();
+            getAllUsers();
             // SUBMIT FORM
-            // Prevent the form from submitting via the browser.
-            let $departmentForm = $('#addDepartment');
-            if ($departmentForm.length) {
-                $departmentForm.validate({
+            let $useForm = $('#addUser');
+            if ($useForm.length) {
+                $useForm.validate({
                     rules: {
-                        departmentName: {
+                        userName: {
                             required: true
                         },
-                        departmentAddress: {
+                        email: {
+                            required: true,
+                            email:true
+                        },
+                        password: {
                             required: true
                         },
-                        departmentCode: {
-                            required: true
+                        departmentId:{
+                            required:true
                         }
                     },
                     messages: {
-                        departmentName: {
-                            required: 'Department Name required'
+                        userName: {
+                            required: 'User Name required'
                         },
-                        departmentAddress: {
-                            required: 'Department Address required'
+                        email: {
+                            required: 'Email required'
                         },
-                        departmentName: {
-                            required: 'Department Code required'
+                        password: {
+                            required: 'Password required'
+                        },
+                        departmentId:{
+                            required:'Department Required'
                         }
                     },
                     submitHandler: function (event) {
+                        event.preventDefault();
                         ajaxPost();
                     }
                 });
             }
         });
-
-            $("#editDepartment").submit(function(event) {
+            $("#editUser").submit(function(event) {
                 // Prevent the form from submitting via the browser.
                 event.preventDefault();
-                getAllDepartments();
-                updateDepartment();
+                getAllUsers();
+                updateUser();
             });
-
             function ajaxPost() {
+
                 // PREPARE FORM DATA
                 const formData = {
-                    departmentName : $("#departmentName").val(),
-                    departmentAddress : $("#departmentAddress").val(),
-                    departmentCode : $("#departmentCode").val()
+                    userName : $("#userName").val(),
+                    email : $("#email").val(),
+                    password : $("#password").val(),
+                    departmentId:$("#departmentEdit").val()
                 }
 
                 // DO POST
                 $.ajax({
                     type : "POST",
                     contentType : "application/json",
-                    url : "http://localhost:8181/departments/save-department",
+                    url : "http://localhost:8181/user/saveUser",
                     data : JSON.stringify(formData),
                     dataType : 'json',
                     success : function(result) {
                         if (result) {
-                            $("#addModal")[0].reset();
                             $('#addModal').modal('hide');
-                            alert("Department saved Successfully");
-                            getAllDepartments();
+                            alert("User saved Successfully");
+                            getAllUsers();
                         } else {
                             alert("An error occured occured");
                         }
-                        console.log(result);
                     },
                     error : function(e) {
                         alert("Error!")
@@ -250,29 +268,38 @@
 
             }
     let formData = "";
-    function getAllDepartments() {
-
+    function getAllUsers() {
+        let departments = null;
+            $.ajax({
+                type : "GET",
+                url: "http://localhost:8181/departments/allDepartments",
+                success : function(response) {
+                    departments = response
+                }
+            });
         $.ajax({
             type : "GET",
-            url : "/departments/allDepartments",
+            url : "/user/allUsers",
             success : function(response) {
                 formData = response
 
                 $('.tr').remove();
                 for (i = 0; i < formData.length; i++) {
 
-                    $("#departmentTable")
+                    $("#userTable")
                         .append(
                             '<tr class="tr"> <td>'
-                            +  formData[i].departmentName
-                            + '</td> <td>'
-                            +  formData[i].departmentAddress
-                            + '</td> <td>'
-                            + formData[i].departmentCode
-                            +'</td> <td>'
-                            + '<a data-target="#editModal" data-toggle="modal" id="editButton" onclick="editDepartment('+formData[i].departmentId+')" title="Edit" class="btn btn-success btn-xs"> <i class="fa fa-edit "></i></a>'
+                            +  formData[i].userName
+                            +   '</td> <td>'
+                            +  formData[i].email
+                            +   '</td> <td>'
+                            +formData[i].password
+                            +   '</td> <td>'
+                            +  departments.filter(item=>item.departmentId==formData[i].departmentId).map(item=>item.departmentName)
+                            +   '</td> <td>'
+                            + '<a data-target="#editModalButton" data-toggle="modal" id="editButton" onclick="editUser('+formData[i].userId+')" title="Edit" class="btn btn-success btn-xs"> <i class="fa fa-edit "></i></a>'
                             +
-                            '<a onclick="deleteDepartment('+formData[i].departmentId+')" title="Remove Student" class="btn btn-danger btn-xs"> <i class="fa fa-trash "></i></a>'
+                            '<a onclick="deleteUser('+formData[i].userId+')" title="Remove" class="btn btn-danger btn-xs"> <i class="fa fa-trash "></i></a>'
                             +
                             '</td>'
                             +
@@ -284,31 +311,64 @@
             }
         });
     }
-    function editDepartment(id) {
+    function editUser(id) {
+        loadAllDepartmentCb();
         $.ajax({
             type : "GET",
-            url : "/departments/" + id,
+            url : "/user/getOneUser/ "+ id,
             dataType : 'json',
             success : function(response) {
-                    $("#idUpdate").val(response.departmentId),
-                    $("#nameUpdate").val(response.departmentName),
-                    $("#addressUpdate").val(response.departmentAddress),
-                    $("#codeUpdate").val(response.departmentCode)
+                    $("#idUpdate").val(response.userId),
+                    $("#userNameUpdate").val(response.userName),
+                    $("#emailUpdate").val(response.email),
+                    $("#passwordUpdate").val(response.password),
+                    $("#departmentUpdate").val(response.departmentId)
             },
+
             error : function(err) {
                 alert("error is" + err)
             }
         });
     }
-    function deleteDepartment(id){
+    function updateUser() {
+        const formData = {
+            userId:$("#idUpdate").val(),
+            userName : $("#userNameUpdate").val(),
+            email : $("#emailUpdate").val(),
+            password : $("#passwordUpdate").val(),
+            departmentId:$("#departmentUpdate").val()
+        }
+
+        // DO POST
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : "/user/saveUser",
+            data : JSON.stringify(formData),
+            dataType : 'json',
+            success : function(result) {
+                if (result) {
+                    $('#editModalButton').modal('hide');
+                    alert("User Updated Successfully");
+                    getAllUsers();
+                } else {
+                    alert("An error occured occured");
+                }
+            },
+            error : function(e) {
+                alert("Error!")
+                console.log("ERROR: ", e);
+            }
+        });
+    }
+    function deleteUser(id){
         $.ajax({
             type:"POST",
-            url:"/departments/deleteDepartment/"+id,
+            url:"/user/deleteUser/"+id,
             success:function(result){
                 if(result){
-                    console.log("reached here");
-                    alert("Department Deleted");
-                    getAllDepartments();
+                    alert("User Deleted");
+                    getAllUsers();
                 }
             },
             error: function(e) {
@@ -316,41 +376,26 @@
             }
         })
     }
-    function updateDepartment() {
-
-        // PREPARE FORM DATA
-        const Data = {
-            departmentId:$("#idUpdate").val(),
-            departmentName : $("#nameUpdate").val(),
-            departmentAddress : $("#addressUpdate").val(),
-            departmentCode : $("#codeUpdate").val()
-        }
-
-        // DO POST
-        $.ajax({
-            type : "POST",
-            contentType : "application/json",
-            url : "/departments/save-department",
-            data : JSON.stringify(Data),
-            dataType : 'json',
-            success : function(result) {
-                if (result) {
-                    $('#editModal').modal('hide');
-                    alert("Department Updated Successfully");
-                    getAllDepartments();
-                } else {
-                    alert("An error occured occured");
-                }
-                console.log(result);
-            },
-            error : function(e) {
-                alert("Error!")
-                console.log("ERROR: ", e);
-            }
-        });
-
+    function loadAllDepartments(){
+        const url="http://localhost:8181/departments/allDepartments";
+        const departmentDropDown=$("#departmentEdit");
+        $.get(url,function(res){
+            departmentDropDown.innerHTML='';
+            $.each(res,function (index,department) {
+              $("<option>").val(department.departmentId).text(department.departmentName).appendTo(departmentDropDown);
+            });
+        })
     }
-
+    function loadAllDepartmentCb(){
+        const url="http://localhost:8181/departments/allDepartments";
+        const departmentDropDown=$("#departmentUpdate");
+        $.get(url,function(res){
+            departmentDropDown.innerHTML='';
+            $.each(res,function (index,department) {
+                $("<option>").val(department.departmentId).text(department.departmentName).appendTo(departmentDropDown);
+            });
+        })
+    }
 </script>
 </body>
 

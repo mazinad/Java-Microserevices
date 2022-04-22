@@ -30,7 +30,7 @@ public class DepartmentController {
     public List<Department> fetchAllDepartments(){
         return departmentService.fetchAllDepartments();
     }
-    @DeleteMapping("/deleteDepartment/{id}")
+    @PostMapping("/deleteDepartment/{id}")
     public void deleteDepartment(@PathVariable("id") Long departmentId){
         departmentService.deleteDepartment(departmentId);
     }

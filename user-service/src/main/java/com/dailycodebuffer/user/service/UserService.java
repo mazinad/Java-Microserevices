@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -31,5 +33,17 @@ public class UserService {
         vo.setUser(user);
         vo.setDepartment(department);
         return vo;
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
+
+    public User getOneUser(Long userId) {
+        return userRepository.findByUserId(userId);
     }
 }
